@@ -202,7 +202,7 @@ def test_unknown_engine_fails_at_startup() -> None:
     # on the first request). Now it is rejected by config validation before the server starts.
     from pydantic import ValidationError
 
-    from slm_runtime.config import Settings
+    from slim_serve.config import Settings
 
     with pytest.raises(ValidationError):
         Settings(engine="tensorrt")  # type: ignore[arg-type]

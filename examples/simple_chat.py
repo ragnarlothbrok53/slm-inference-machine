@@ -1,6 +1,6 @@
-"""Minimal interactive chat client that streams tokens from a running slm-runtime server.
+"""Minimal interactive chat client that streams tokens from a running slim-serve server.
 
-    uv run slm-runtime serve            # in one terminal
+    uv run slim-serve serve            # in one terminal
     uv run python examples/simple_chat.py
 
 The server exposes a raw completions API, so the client applies the chat template itself. The
@@ -27,7 +27,7 @@ def chatml(history: list[tuple[str, str]]) -> str:
 
 def main() -> None:
     history: list[tuple[str, str]] = []
-    print("Chatting with slm-runtime. Ctrl-C to exit.")
+    print("Chatting with slim-serve. Ctrl-C to exit.")
     with httpx.Client(timeout=120) as client:
         while True:
             try:

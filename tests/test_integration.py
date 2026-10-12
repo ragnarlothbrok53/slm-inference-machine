@@ -15,9 +15,9 @@ import pytest
 import uvicorn
 from helpers import InstrumentedEngine
 
-from slm_runtime.app import create_app
-from slm_runtime.config import Settings
-from slm_runtime.engines import Engine
+from slim_serve.app import create_app
+from slim_serve.config import Settings
+from slim_serve.engines import Engine
 
 
 def _free_port() -> int:

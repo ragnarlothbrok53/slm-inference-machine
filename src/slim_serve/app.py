@@ -112,7 +112,7 @@ def create_app(settings: Settings | None = None, engines: list[Engine] | None = 
             await asyncio.gather(load_task, return_exceptions=True)
             await scheduler.stop()
 
-    app = FastAPI(title="slm-runtime", version=__version__, lifespan=lifespan)
+    app = FastAPI(title="slim-serve", version=__version__, lifespan=lifespan)
     app.add_middleware(RequestContextMiddleware)
     app.state.scheduler = scheduler
     app.state.metrics = metrics

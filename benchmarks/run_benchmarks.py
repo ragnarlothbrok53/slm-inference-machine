@@ -1,6 +1,6 @@
 """Run named benchmark scenarios end-to-end and regenerate the results report.
 
-For each scenario this script: starts ``slm-runtime serve`` as a subprocess with a fixed config,
+For each scenario this script: starts ``slim-serve serve`` as a subprocess with a fixed config,
 waits for /readyz, samples the server process's RSS and CPU while ``loadgen`` drives load, stops
 the server, and writes ``benchmarks/results/<scenario>/{summary.json,summary.csv,requests.csv}``.
 ``benchmarks/results/README.md`` is then regenerated from every summary.json present.
@@ -36,7 +36,7 @@ import psutil
 sys.path.insert(0, str(Path(__file__).parent))
 import loadgen
 
-from slm_runtime.hardware import detect_hardware
+from slim_serve.hardware import detect_hardware
 
 ROOT = Path(__file__).resolve().parent.parent
 RESULTS = ROOT / "benchmarks" / "results"
@@ -246,7 +246,7 @@ def run_once(name: str, sc: Scenario, run: int) -> None:
     print(f"[run {run}] {name}: {sc.description}")
     with open(out_dir / "server.log", "w") as log:
         server = subprocess.Popen(
-            [sys.executable, "-m", "slm_runtime.cli", "serve"],
+            [sys.executable, "-m", "slim_serve.cli", "serve"],
             env=env,
             stdout=log,
             stderr=subprocess.STDOUT,

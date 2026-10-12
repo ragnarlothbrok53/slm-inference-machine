@@ -1,4 +1,4 @@
-"""Command-line entry point: ``slm-runtime serve | info``.
+"""Command-line entry point: ``slim-serve serve | info``.
 
 CLI flags override ``SLM_*`` environment variables, which override defaults.
 """
@@ -15,7 +15,7 @@ from .config import Settings
 from .hardware import detect_hardware
 from .logs import configure_logging
 
-app = typer.Typer(help="slm-runtime: serve small language models locally.", no_args_is_help=True)
+app = typer.Typer(help="slim-serve: serve small language models locally.", no_args_is_help=True)
 
 
 @app.command()

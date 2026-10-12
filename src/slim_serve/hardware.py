@@ -1,4 +1,4 @@
-"""Best-effort host description, recorded with benchmark results and shown by ``slm-runtime info``.
+"""Best-effort host description, recorded with benchmark results and shown by ``slim-serve info``.
 
 Uses only the standard library and psutil; the previous version imported torch (~GBs) just to
 check for CUDA/MPS.
