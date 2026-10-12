@@ -1,10 +1,10 @@
-# slm-runtime
+# SLIM — Small Language Inference Machine
 
 A small inference server for local small language models: an OpenAI-compatible streaming API
 over llama.cpp (GGUF) and MLX backends, with explicit admission control, deadlines, cancellation
 and Prometheus metrics.
 
-[![CI](https://github.com/ragnarlothbrok53/slm-inference-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/ragnarlothbrok53/slm-inference-engine/actions/workflows/ci.yml)
+[![CI](https://github.com/ragnarlothbrok53/slm-inference-machine/actions/workflows/ci.yml/badge.svg)](https://github.com/ragnarlothbrok53/slm-inference-machine/actions/workflows/ci.yml)
 
 ## Why this exists
 
@@ -223,8 +223,8 @@ each line is a JSON object. An example (text mode) from a real run:
 Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-git clone https://github.com/ragnarlothbrok53/slm-inference-engine.git
-cd slm-inference-engine
+git clone https://github.com/ragnarlothbrok53/slm-inference-machine.git
+cd slm-inference-machine
 uv sync --extra llama          # prebuilt CPU wheel for llama.cpp; no compiler needed
 
 mkdir -p models
