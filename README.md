@@ -20,7 +20,7 @@ where things break:
   slower, until clients time out and retry.
 - **You can't tell why it's slow.** Was it time in the queue, prompt prefill, or decode speed?
 
-slm-runtime is the serving layer that deals with these: about 1,100 lines of Python, tested
+slim-serve is the serving layer that deals with these: about 1,100 lines of Python, tested
 independently of any model, and benchmarked on real hardware with reproducible scripts. It is
 **not** a replacement for vLLM, TGI or `llama-server`: it doesn't batch sequences (see
 [Design tradeoffs](#design-tradeoffs)).
@@ -231,18 +231,18 @@ mkdir -p models
 curl -L -o models/qwen2.5-0.5b-instruct-q4_k_m.gguf \
   https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/qwen2.5-0.5b-instruct-q4_k_m.gguf
 
-uv run slm-runtime serve       # http://127.0.0.1:8000
+uv run slim-serve serve       # http://127.0.0.1:8000
 ```
 
-No model? `SLM_ENGINE=fake uv run slm-runtime serve` serves deterministic fake tokens through
+No model? `SLM_ENGINE=fake uv run slim-serve serve` serves deterministic fake tokens through
 the same stack.
 
 **Docker** (CPU, llama.cpp backend; the model is mounted, not baked in):
 
 ```bash
-docker build -t slm-runtime .
+docker build -t slim-serve .
 docker run --rm -p 8000:8000 -v "$PWD/models:/models:ro" \
-  -e SLM_MODEL_PATH=/models/qwen2.5-0.5b-instruct-q4_k_m.gguf slm-runtime
+  -e SLM_MODEL_PATH=/models/qwen2.5-0.5b-instruct-q4_k_m.gguf slim-serve
 ```
 
 ## Usage
@@ -278,14 +278,14 @@ The server exposes the raw completions API, so chat templates are applied by the
 ChatML (the Qwen2.5 template).
 
 ```bash
-uv run slm-runtime info        # detected hardware + effective configuration
+uv run slim-serve info        # detected hardware + effective configuration
 ```
 
 ## Configuration
 
 Environment variables (prefix `SLM_`), a `.env` file (see [`.env.example`](.env.example)), or
 `serve` flags (`--model`, `--engine`, `--host`, `--port`, `--replicas`, `--n-threads`), which
-take precedence. Full definitions, types and bounds: [`config.py`](src/slm_runtime/config.py).
+take precedence. Full definitions, types and bounds: [`config.py`](src/slim_serve/config.py).
 
 | Variable | Default | Meaning |
 |---|---|---|
@@ -401,7 +401,7 @@ non-Latin scripts); the MLX backend isn't exercised in CI.
 ## Project structure
 
 ```
-src/slm_runtime/    app.py · scheduler.py · engines/ · metrics.py · schemas.py · config.py · logs.py · hardware.py · cli.py
+src/slim_serve/    app.py · scheduler.py · engines/ · metrics.py · schemas.py · config.py · logs.py · hardware.py · cli.py
 tests/              scheduler, HTTP contract, integration (real socket, real model)
 benchmarks/         loadgen.py · run_benchmarks.py · results/
 docs/               architecture.md · design-decisions.md · benchmarking.md

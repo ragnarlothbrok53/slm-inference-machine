@@ -127,5 +127,5 @@ than half-done. `examples/simple_chat.py` applies ChatML on the client side.
 
 The prototype's package was named `runtime`, with a subpackage also called `runtime`
 (`runtime.runtime.engine_manager`) and 10 empty modules. It is now one flat package,
-`slm_runtime`, with one module per concern. The tree is small enough that sub-packages, apart from
+`slim_serve`, with one module per concern. The tree is small enough that sub-packages, apart from
 `engines/`, would only add indirection.

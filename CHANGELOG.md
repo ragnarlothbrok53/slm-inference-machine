@@ -39,10 +39,10 @@ blocking completion route and placeholder modules.
   rejected at startup by config validation.
 
 ### Changed
-- Package renamed `runtime` → `slm_runtime`; distribution `ml-service` → `slm-runtime`.
+- Package renamed `runtime` → `slim_serve`; distribution `ml-service` → `slim-serve`.
 - Hardware detection no longer imports PyTorch; `torch`, `transformers` and the unused
   OpenTelemetry packages are no longer dependencies.
-- CLI: `slm-runtime serve` (flags override env vars) and `slm-runtime info`.
+- CLI: `slim-serve serve` (flags override env vars) and `slim-serve info`.
 
 ### Removed
 - Empty placeholder modules (`router.py`, `profiler.py`, `token_streamer.py`, `settings.py`, …)

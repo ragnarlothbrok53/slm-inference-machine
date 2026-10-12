@@ -11,10 +11,10 @@ from contextlib import asynccontextmanager
 import httpx
 from fastapi import FastAPI
 
-from slm_runtime.app import create_app
-from slm_runtime.config import Settings
-from slm_runtime.engines import Chunk, Engine, GenerationParams
-from slm_runtime.engines.fake import FakeEngine
+from slim_serve.app import create_app
+from slim_serve.config import Settings
+from slim_serve.engines import Chunk, Engine, GenerationParams
+from slim_serve.engines.fake import FakeEngine
 
 
 class InstrumentedEngine(FakeEngine):

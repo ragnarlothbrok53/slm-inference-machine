@@ -4,7 +4,7 @@ A single-process HTTP server that owns one or more in-memory model replicas and 
 concurrent requests onto them.
 
 ```
-src/slm_runtime/
+src/slim_serve/
 ├── app.py          FastAPI app factory: routes, error mapping, request-ID/access-log middleware, lifespan
 ├── scheduler.py    admission control, FIFO queue, replica workers, thread↔event-loop bridge, deadlines
 ├── engines/
@@ -18,7 +18,7 @@ src/slm_runtime/
 ├── config.py       pydantic-settings (SLM_* env vars / .env)
 ├── logs.py         loguru setup (text or JSON), stdlib logging interception
 ├── hardware.py     host description for `info` and benchmark metadata
-└── cli.py          `slm-runtime serve | info`
+└── cli.py          `slim-serve serve | info`
 ```
 
 ## Request lifecycle (streaming)

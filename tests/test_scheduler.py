@@ -9,9 +9,9 @@ from contextlib import asynccontextmanager
 import pytest
 from helpers import BrokenLoadEngine, FailingEngine, InstrumentedEngine
 
-from slm_runtime.engines import Engine, GenerationParams
-from slm_runtime.metrics import Metrics
-from slm_runtime.scheduler import (
+from slim_serve.engines import Engine, GenerationParams
+from slim_serve.metrics import Metrics
+from slim_serve.scheduler import (
     DeadlineExceededError,
     EngineError,
     Generation,
