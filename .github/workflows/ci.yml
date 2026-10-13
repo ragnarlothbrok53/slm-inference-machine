@@ -56,12 +56,12 @@ jobs:
         with:
           context: .
           load: true
-          tags: slm-runtime:ci
+          tags: slim-serve:ci
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Smoke test (fake engine, no model needed)
         run: |
-          docker run -d --name slm -p 8000:8000 -e SLM_ENGINE=fake slm-runtime:ci
+          docker run -d --name slm -p 8000:8000 -e SLM_ENGINE=fake slim-serve:ci
           for i in $(seq 1 30); do curl -fs localhost:8000/readyz && break; sleep 1; done
           curl -fs localhost:8000/v1/completions -H 'content-type: application/json' \
             -d '{"prompt":"hello","max_tokens":4}' | tee /dev/stderr | grep -q '"finish_reason":"length"'
