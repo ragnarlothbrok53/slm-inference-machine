@@ -1,3 +1,3 @@
 """slim-serve: a small, observable inference server for local small language models."""
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
