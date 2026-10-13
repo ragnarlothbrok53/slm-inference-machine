@@ -5,6 +5,17 @@ description = "A small, observable inference server for local small language mod
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.11"
+keywords = ["llm", "inference", "llama.cpp", "mlx", "openai", "serving", "small-language-models"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: FastAPI",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 dependencies = [
     "fastapi>=0.115",
     "uvicorn>=0.30",
@@ -16,6 +27,12 @@ dependencies = [
     "typer>=0.12",
     "httpx>=0.27",
 ]
+
+[project.urls]
+Homepage = "https://github.com/ragnarlothbrok53/slm-inference-machine"
+Repository = "https://github.com/ragnarlothbrok53/slm-inference-machine"
+Changelog = "https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/CHANGELOG.md"
+Issues = "https://github.com/ragnarlothbrok53/slm-inference-machine/issues"
 
 [project.optional-dependencies]
 # Backends are optional so the server, tests and benchmarks install anywhere.

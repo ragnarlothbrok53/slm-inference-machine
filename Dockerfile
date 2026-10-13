@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1
 # CPU image with the llama.cpp backend. The model is NOT baked in: mount it at /models.
 #
-#   docker build -t slm-runtime .
+#   docker build -t slim-serve .
 #   docker run --rm -p 8000:8000 -v "$PWD/models:/models:ro" \
-#     -e SLM_MODEL_PATH=/models/qwen2.5-0.5b-instruct-q4_k_m.gguf slm-runtime
+#     -e SLM_MODEL_PATH=/models/qwen2.5-0.5b-instruct-q4_k_m.gguf slim-serve
 
 FROM python:3.11-slim AS builder
 COPY --from=ghcr.io/astral-sh/uv:0.8 /uv /bin/uv
@@ -35,4 +35,4 @@ EXPOSE 8000
 # "healthy" means ready to serve (weights loaded); allow time for large models to load.
 HEALTHCHECK --interval=10s --timeout=3s --start-period=120s --retries=3 \
     CMD ["python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/readyz', timeout=2)"]
-CMD ["slm-runtime", "serve"]
+CMD ["slim-serve", "serve"]

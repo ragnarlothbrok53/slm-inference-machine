@@ -42,7 +42,7 @@ independently of any model, and benchmarked on real hardware with reproducible s
   structured (JSON) logs with `X-Request-ID` propagation.
 - **Evidence**: 42 tests (failure paths, a real-socket disconnect, an opt-in real-model test),
   strict mypy, CI, and a benchmark harness whose committed results are in
-  [`benchmarks/results/`](benchmarks/results/README.md).
+  [`benchmarks/results/`](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/benchmarks/results/README.md).
 
 ## Architecture
 
@@ -88,12 +88,12 @@ flowchart LR
 - **External dependencies.** A model file on local disk. No network calls at runtime.
 
 Details, including the sequence diagram, the thread model and the cancellation semantics:
-[docs/architecture.md](docs/architecture.md).
+[docs/architecture.md](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/docs/architecture.md).
 
 ## Technical design
 
 The decisions that shape the system. Each is argued in full, with alternatives, in
-[docs/design-decisions.md](docs/design-decisions.md).
+[docs/design-decisions.md](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/docs/design-decisions.md).
 
 | Decision | Why |
 |---|---|
@@ -111,8 +111,8 @@ All numbers below were **measured**: 3 interleaved runs per scenario, a fresh se
 commit `b848fa5`, on a Windows laptop (Intel Core Ultra 7 165U, 14 threads, 32 GB, CPU only)
 running normal background software. Values are medians, with [min–max] across runs. Full tables,
 raw per-request CSVs and environment metadata are in
-[`benchmarks/results/`](benchmarks/results/README.md); methodology and caveats are in
-[docs/benchmarking.md](docs/benchmarking.md). The model is **Qwen2.5-0.5B-Instruct Q4_K_M**
+[`benchmarks/results/`](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/benchmarks/results/README.md); methodology and caveats are in
+[docs/benchmarking.md](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/docs/benchmarking.md). The model is **Qwen2.5-0.5B-Instruct Q4_K_M**
 (469 MB GGUF).
 
 **1. The scheduler behaves as queueing theory predicts** (`queueing`: fake engine with a known
@@ -220,7 +220,17 @@ each line is a JSON object. An example (text mode) from a real run:
 
 ## Quick start
 
-Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
+**From PyPI:**
+
+```bash
+pip install "slim-serve[llama]"   --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu   # prebuilt CPU wheel
+slim-serve serve --model path/to/model.gguf
+```
+
+Without `--extra-index-url`, pip builds llama-cpp-python from source (needs a C++ compiler).
+On Apple Silicon, `pip install "slim-serve[mlx]"` installs the MLX backend instead.
+
+**From source** (Python 3.11+ and [uv](https://docs.astral.sh/uv/)):
 
 ```bash
 git clone https://github.com/ragnarlothbrok53/slm-inference-machine.git
@@ -274,7 +284,7 @@ for chunk in client.completions.create(model="any", prompt="Hello", max_tokens=3
 ```
 
 The server exposes the raw completions API, so chat templates are applied by the client.
-[`examples/simple_chat.py`](examples/simple_chat.py) is a small streaming chat REPL that applies
+[`examples/simple_chat.py`](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/examples/simple_chat.py) is a small streaming chat REPL that applies
 ChatML (the Qwen2.5 template).
 
 ```bash
@@ -283,9 +293,9 @@ uv run slim-serve info        # detected hardware + effective configuration
 
 ## Configuration
 
-Environment variables (prefix `SLM_`), a `.env` file (see [`.env.example`](.env.example)), or
+Environment variables (prefix `SLM_`), a `.env` file (see [`.env.example`](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/.env.example)), or
 `serve` flags (`--model`, `--engine`, `--host`, `--port`, `--replicas`, `--n-threads`), which
-take precedence. Full definitions, types and bounds: [`config.py`](src/slim_serve/config.py).
+take precedence. Full definitions, types and bounds: [`config.py`](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/src/slim_serve/config.py).
 
 | Variable | Default | Meaning |
 |---|---|---|
@@ -311,7 +321,7 @@ uv run pytest                    # 42 tests, ~15 s; the real-model test runs if 
 uv run ruff check . && uv run ruff format --check . && uv run mypy
 ```
 
-What the tests pin down, in [`tests/`](tests/):
+What the tests pin down, in [`tests/`](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/tests/):
 
 - **Scheduler** (`test_scheduler.py`): FIFO order; one request per replica; replicas run in
   parallel; queue-full rejection (including `max_queue_size=0`); a deadline while generating
@@ -329,7 +339,7 @@ The tests were checked by mutation. Moving inference back onto the event loop fa
 removing the cancellation check fails the deadline, cancellation and real-socket disconnect
 tests.
 
-CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs lint, format, strict mypy and
+CI ([`.github/workflows/ci.yml`](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/.github/workflows/ci.yml)) runs lint, format, strict mypy and
 tests; the real-model integration test (with a cached model download); and a Docker build plus a
 smoke test of the container.
 
@@ -346,7 +356,7 @@ uv run python benchmarks/loadgen.py --url http://127.0.0.1:8000 --concurrency 1 
 
 Each run starts a fresh server, samples its memory and CPU, and writes JSON/CSV with the commit,
 hardware and configuration. The methodology and caveats are in
-[docs/benchmarking.md](docs/benchmarking.md).
+[docs/benchmarking.md](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/docs/benchmarking.md).
 
 ## Design tradeoffs
 
@@ -410,4 +420,4 @@ examples/           simple_chat.py
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+MIT, see [LICENSE](https://github.com/ragnarlothbrok53/slm-inference-machine/blob/main/LICENSE).
